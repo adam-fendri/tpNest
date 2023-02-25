@@ -23,7 +23,7 @@ export class TodoService {
     }
 
     this.todos.push(
-      new TodoModel(this.randomID, todo.name, todo.description, 'waiting'),
+      new TodoModel(this.randomID(), todo.name, todo.description, 'waiting'),
     );
   }
 

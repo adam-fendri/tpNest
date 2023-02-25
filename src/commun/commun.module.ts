@@ -3,7 +3,7 @@ import { v4 } from 'uuid';
 
 @Global()
 @Module({
-  providers: [{ provide: 'randomID', useValue: v4() }],
-  exports: [{ provide: 'randomID', useValue: v4() }],
+  providers: [{ provide: 'randomID', useValue: v4 }],
+  exports: [{ provide: 'randomID', useValue: v4 }],
 })
 export class CommunModule {}
