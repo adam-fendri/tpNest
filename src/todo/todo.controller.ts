@@ -7,8 +7,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { TodoAddTDO } from './todoAddDTO';
-import { TodoUpdateDTO } from './todoUpdateDTO';
+import { TodoAddTDO } from './dto/todoAddDTO';
+import { TodoUpdateDTO } from './dto/todoUpdateDTO';
 import { TodoService } from './todo.service';
 
 @Controller('todo')
