@@ -6,20 +6,38 @@ import {
 } from '@nestjs/common';
 import { TodoModel } from './todo.model';
 import { TodoStatusEnum } from './todo.statusenum';
-import { TodoAddTDO } from './dto/todoAddDTO';  
+import { TodoAddDTO } from './dto/todoAddDTO';  
 import { TodoUpdateDTO } from './dto/todoUpdateDTO';
+import { TodoEntity } from './entities/todo.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TodoService {
   private todos = [];
   
-  constructor(@Inject('randomID') private readonly randomID) {}
+  constructor(@Inject('randomID') private readonly randomID,
+  @InjectRepository(TodoEntity)
+private readonly postRepository: Repository<TodoEntity>) {}
   getTodos() {
     return this.todos;
   }
-  
+  /**
+   * 
+   * @param todo 
+   * @returns 
+   */
+  addTodov2(todo: TodoAddDTO) {
+    if (todo.description == undefined || todo.name == undefined) {
+      return new BadRequestException();
+    }
+    
+    this.todos.push(
+      new TodoModel(this.randomID(), todo.name, todo.description, 'waiting'),
+    );
+  }
 
-  addTodo(todo: TodoAddTDO) {
+  addTodo(todo: TodoAddDTO) {
     if (todo.description == undefined || todo.name == undefined) {
       return new BadRequestException();
     }

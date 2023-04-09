@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { TodoAddTDO } from './dto/todoAddDTO';
+import { TodoAddDTO } from './dto/todoAddDTO';
 import { TodoUpdateDTO } from './dto/todoUpdateDTO';
 import { TodoService } from './todo.service';
 
@@ -21,7 +21,7 @@ export class TodoController {
   }
 
   @Post('/add')
-  addTodo(@Body() todoad: TodoAddTDO) {
+  addTodo(@Body() todoad: TodoAddDTO) {
     this.todoService.addTodo(todoad);
     return this.todoService.getTodos();
   }

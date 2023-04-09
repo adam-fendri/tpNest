@@ -1,25 +1,15 @@
+import { PartialType } from '@nestjs/mapped-types';
 import { ValidationArguments } from 'class-validator';
-import { IsIn, IsOptional, Length, MinLength } from 'class-validator/types/decorator/decorators';
-import { ErrorMsg } from '../ErrorMsg';
+import { IsIn, IsOptional, Length, MinLength } from 'class-validator';
+import { ErrorMsg } from '../../helpers/ErrorMsg.helper';
 import { TodoStatusEnum } from '../todo.statusenum';
+import { TodoAddDTO } from './todoAddDTO';
 
 
-export class TodoUpdateDTO {
+export class TodoUpdateDTO extends PartialType(TodoAddDTO) {
 
-  
-  @Length(3,10,{message:(validationData:ValidationArguments)=>{
-    return ErrorMsg.lenght_error_message(true,true,validationData)}})
-  @IsOptional()
-  name: string;
-  
-  @MinLength(10,{message:(validationData:ValidationArguments)=>{
-    return `la taille de votre ${validationData.property} ${validationData.value} ne respecte pas les contraintes, 
-    la taille de ${validationData.property} doit etre entre ${validationData.constraints[0]} et ${validationData.constraints[1]} `
-  }})
-  @IsOptional()
-  description: string;
 
   @IsOptional()
-  @IsIn(['actif','waiting' ,'done' ])
+  @IsIn(['En cours','En attente','Finalisé', ])
   status: TodoStatusEnum;
 }
